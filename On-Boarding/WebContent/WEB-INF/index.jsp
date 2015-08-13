@@ -1,4 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
 
@@ -37,7 +41,7 @@ $(document).ready(function() {
 <!--WRAPPER-->
 <div id="wrapper">
 <!--LOGIN FORM-->
-<form name="login-form" class="login-form" action="" method="post">
+<form:form method="post" name="login-form" class="login-form">
 
 	<!--HEADER-->
     <div class="header">
@@ -47,30 +51,29 @@ $(document).ready(function() {
 	
 	<!--CONTENT-->
     <div class="content">
-	<!--USERNAME--><input name="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
-    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+	<!--USERNAME--><form:input path="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
+    <!--PASSWORD--><form:input path="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
 	<br><br>
-	<select name="typeofac" id="accesstype">
-		<option>Select user access type</option>
-		<option value="HR">HR</option>
-		<option value="Employee">Employee</option>
-		<option value="Admin">Admin</option>
-	</select>	
+	<form:select path="typeofac" id="accesstype">
+		<form:option value="default">Select user access type</form:option>
+		<form:option value="HR">HR</form:option>
+		<form:option value="Employee">Employee</form:option>
+		<form:option value="Admin">Admin</form:option>
+	</form:select>	
 	</div>
     <!--END CONTENT-->
     
     <!--FOOTER-->
     <div class="footer">
-    <!--LOGIN BUTTON--><input type="submit" name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
+    <!--LOGIN BUTTON--><form:input type="submit" path="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
     </div>
     <!--END FOOTER-->
 
-</form>
+</form:form>
 <!--END LOGIN FORM-->
 
 </div>
 <!--END WRAPPER-->
-
 
 </body>
 </html>
