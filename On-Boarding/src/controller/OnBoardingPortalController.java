@@ -12,7 +12,6 @@ import Entities.*;
 public interface OnBoardingPortalController {
 
 	// TODO:add methods after changing signature
-
 	
 	public ModelAndView loginUser(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") User user);
