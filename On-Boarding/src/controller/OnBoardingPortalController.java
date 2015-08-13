@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import requests.EmployeeGroupRequest;
 import Entities.*;
 
-public interface OnBoardingPortalController  {
+public interface OnBoardingPortalController {
 
-	//TODO:add methods after changing signature
-	
+	// TODO:add methods after changing signature
+
 	public ModelAndView loginUser(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") User user);
 
@@ -45,4 +46,11 @@ public interface OnBoardingPortalController  {
 	public ModelAndView updateProfileOfHR(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") HR hr);
 
+	public ModelAndView addEmployeeToGroup(HttpServletRequest request,
+			HttpServletResponse response,
+			@ModelAttribute("") EmployeeGroupRequest employeeGroupRequest);
+
+	public ModelAndView removeEmployeeFromGroup(HttpServletRequest request,
+			HttpServletResponse response,
+			@ModelAttribute("") EmployeeGroupRequest employeeGroupRequest);
 }

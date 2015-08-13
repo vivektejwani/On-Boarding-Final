@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import requests.EmployeeGroupRequest;
 import controller.OnBoardingPortalController;
 import DAO.OnBoardingPortalDAO;
 import Entities.*;
@@ -148,6 +149,25 @@ public class OnBoardingPortalControllerImpl implements
 			HttpServletResponse response, @ModelAttribute("") HR hr) {
 		return null;
 
+	}
+
+	public ModelAndView addEmployeeToGroup(HttpServletRequest request,
+			HttpServletResponse response,
+			EmployeeGroupRequest employeeGroupRequest) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		onBoardingPortalDAO.addEmployee(employeeGroupRequest);
+		
+		modelAndView.setViewName("");
+		return modelAndView;
+	}
+
+	public ModelAndView removeEmployeeFromGroup(HttpServletRequest request,
+			HttpServletResponse response,
+			EmployeeGroupRequest employeeGroupRequest) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
