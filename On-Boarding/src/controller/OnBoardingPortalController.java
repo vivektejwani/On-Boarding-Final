@@ -12,12 +12,5 @@ import Entities.HR;
 
 public interface OnBoardingPortalController  {
 
-	public ModelAndView loginEmployee(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") Employee employee) ;
-
-	public ModelAndView loginAdmin(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") Admin admin);
-
-	public ModelAndView loginHr(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") HR hr) ;
+	//TODO:add methods after changing signature
 }

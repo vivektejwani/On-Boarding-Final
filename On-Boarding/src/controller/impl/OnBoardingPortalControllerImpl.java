@@ -12,11 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controller.OnBoardingPortalController;
 import DAO.OnBoardingPortalDAO;
-import Entities.Admin;
-import Entities.Employee;
-import Entities.Group;
-import Entities.HR;
-import Entities.Message;
+import Entities.*;
 
 @Controller
 public class OnBoardingPortalControllerImpl implements
@@ -27,11 +23,15 @@ public class OnBoardingPortalControllerImpl implements
 
 	//TODO: put url and model attribute
 	@RequestMapping("")
-	public ModelAndView loginEmployee(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") Employee employee) {
+	public ModelAndView loginUser(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute("") User user ){
 
 		ModelAndView modelAndView = new ModelAndView();
 
+		if(user.getType().equalsIgnoreCase("employee")){
+			
+			Employee employee= new Employee(user.getEmail(), user.getPassword());
+		}
 		if (onBoardingPortalDAO.validateEmployee(employee)) {
 
 			HttpSession session = request.getSession();
@@ -95,6 +95,25 @@ public class OnBoardingPortalControllerImpl implements
 
 	}
 
+	//TODO: put url and model attribute
+	@RequestMapping("")
+	public ModelAndView logout(HttpServletRequest request,
+			HttpServletResponse response){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		// TODO: set view name
+		modelAndView.setViewName("");
+		return modelAndView;
+	}
+	
+	
+	
+	
+	//TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView addHR(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") HR hr) {
