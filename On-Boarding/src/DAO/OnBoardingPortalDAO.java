@@ -5,16 +5,22 @@ import Entities.*;
 
 public interface OnBoardingPortalDAO 
 {
-	public int addEmployee(Employee employee);
-	public int addHr(HR hr);
-	public int addGroup(Group group);
+	public boolean addEmployee(Employee employee);
+	public boolean addHr(HR hr);
+	public boolean addGroup(Group group);
+	public boolean addMessage(Message message);
 	
-	public int removeEmployee(Employee employee);
-	public int removeGroup(Group group);
-	public int removeEmployeeGroup(Employee employee,Group group);
+	public boolean addEmployeeGroup(Employee employee);
 	
-	public boolean validateEmployee(Employee employee);
-	public boolean validateHr(HR hr);
-	public boolean validateAdmin(Admin admin);
+	public boolean removeEmployee(Employee employee);
+	public boolean removeGroup(Group group);
+	//public boolean removeEmployeeGroup();
+	public boolean removeMessage(Message message);
+	
+	//public Employee validateEmployee(Employee employee);
+	//public HR validateHr(HR hr);
+	//public Admin validateAdmin(Admin admin);
 
+	//public boolean updateEmployee(Employee employee);
+	//public boolean updateHr(HR hr);
 }
