@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +19,7 @@ import Entities.*;
 public class OnBoardingPortalControllerImpl implements
 		OnBoardingPortalController {
 
-	@Autowired
+	//@Autowired
 	OnBoardingPortalDAO onBoardingPortalDAO;
 
 	//TODO: put url and model attribute
@@ -169,5 +170,18 @@ public class OnBoardingPortalControllerImpl implements
 			HttpServletResponse response, @ModelAttribute("") HR hr) {
 		return null;
 
+	}
+	
+	@RequestMapping("newSession.htm")
+	public ModelAndView newSession(HttpServletRequest request,HttpServletResponse response, ModelMap map){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		User user = new User();
+		map.addAttribute(user);
+		System.out.println("Passing user");
+		// TODO: set view name
+		modelAndView.setViewName("index");
+		return modelAndView;
 	}
 }
