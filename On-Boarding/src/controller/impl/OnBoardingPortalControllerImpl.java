@@ -25,7 +25,7 @@ public class OnBoardingPortalControllerImpl implements
 	// TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView loginUser(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") User user ) {
+			HttpServletResponse response, @ModelAttribute("") User user) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
