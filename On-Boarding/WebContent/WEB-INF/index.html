@@ -36,12 +36,6 @@ $(document).ready(function() {
 
 <!--WRAPPER-->
 <div id="wrapper">
-
-	<!--SLIDE-IN ICONS-->
-    <div class="user-icon"></div>
-    <div class="pass-icon"></div>
-    <!--END SLIDE-IN ICONS-->
-
 <!--LOGIN FORM-->
 <form name="login-form" class="login-form" action="" method="post">
 
@@ -55,10 +49,12 @@ $(document).ready(function() {
     <div class="content">
 	<!--USERNAME--><input name="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
     <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
-	<select name="typeofac" class="accesstype" value="Select user access type">
+	<br><br>
+	<select name="typeofac" id="accesstype">
+		<option>Select user access type</option>
 		<option value="HR">HR</option>
 		<option value="Employee">Employee</option>
-		<option value="Admin">Admin</Option>
+		<option value="Admin">Admin</option>
 	</select>	
 	</div>
     <!--END CONTENT-->
@@ -75,7 +71,6 @@ $(document).ready(function() {
 </div>
 <!--END WRAPPER-->
 
-<!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
 
 </body>
 </html>
