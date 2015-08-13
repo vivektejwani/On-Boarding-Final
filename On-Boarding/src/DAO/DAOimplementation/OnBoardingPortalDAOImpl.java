@@ -229,38 +229,8 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 
 
 
-		public Employee validateEmployee(Employee employee) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 
 
-
-		public HR validateHr(HR hr) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-
-
-		public Admin validateAdmin(Admin admin) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-
-
-		public boolean updateEmployee(Employee employee) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-
-
-		public boolean updateHr(HR hr) {
-			// TODO Auto-generated method stub
-			return false;
-		}
 	    
 	    
 	
