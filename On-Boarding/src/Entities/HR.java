@@ -8,6 +8,15 @@ public class HR {
 	String password,firstName,lastName,email;
 	ArrayList<Group> groupList = new ArrayList<Group>();
 	
+	public HR() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public HR(String email,String password) {
+		// TODO Auto-generated constructor stub
+		this.email = email;
+		this.password = password;
+	}
 	public int getHrId() {
 		return hrId;
 	}

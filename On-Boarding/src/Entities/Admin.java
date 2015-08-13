@@ -4,6 +4,16 @@ public class Admin {
 
 	int adminId;
 	String email,password;
+	
+	public Admin() {
+		// TODO Auto-generated constructor stub
+	}
+	public Admin(String email, String password) {
+		// TODO Auto-generated constructor stub
+		this.email = email;
+		this.password = password;
+	}
+	
 	public int getAdminId() {
 		return adminId;
 	}
