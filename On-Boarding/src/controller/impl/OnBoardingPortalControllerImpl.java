@@ -27,8 +27,8 @@ public class OnBoardingPortalControllerImpl implements
 
 	//TODO: put url and model attribute
 	@RequestMapping("")
-	public ModelAndView loginEmployee(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") Employee employee) {
+	public ModelAndView loginUser(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute("") User user {
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -95,6 +95,25 @@ public class OnBoardingPortalControllerImpl implements
 
 	}
 
+	//TODO: put url and model attribute
+	@RequestMapping("")
+	public ModelAndView logout(HttpServletRequest request,
+			HttpServletResponse response){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		// TODO: set view name
+		modelAndView.setViewName("");
+		return modelAndView;
+	}
+	
+	
+	
+	
+	//TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView addHR(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") HR hr) {
