@@ -42,6 +42,10 @@ public interface OnBoardingPortalController {
 
 	public ModelAndView removePost(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") Message message);
+	
+	
+	
+	
 
 	public ModelAndView updateProfileOfEmployee(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") Employee employee);
