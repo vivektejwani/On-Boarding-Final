@@ -1,9 +1,19 @@
 package Entities;
 
+import java.util.ArrayList;
+
 public class Employee {
 	
 	int empId;
 	String password,email,designation,firstName,lastName;
+	ArrayList<Group> groupList = new ArrayList<Group>();
+	
+	public ArrayList<Group> getGroupList() {
+		return groupList;
+	}
+	public void setGroupList(ArrayList<Group> groupList) {
+		this.groupList = groupList;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
