@@ -1,9 +1,13 @@
 package Entities;
 
+import java.util.ArrayList;
+
 public class HR {
 
 	int hrId;
 	String password,firstName,lastName,email;
+	ArrayList<Group> groupList = new ArrayList<Group>();
+	
 	public int getHrId() {
 		return hrId;
 	}
@@ -12,6 +16,12 @@ public class HR {
 	}
 	public String getPassword() {
 		return password;
+	}
+	public ArrayList<Group> getGroupList() {
+		return groupList;
+	}
+	public void setGroupList(ArrayList<Group> groupList) {
+		this.groupList = groupList;
 	}
 	public void setPassword(String password) {
 		this.password = password;
