@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Message {
 
-	int msgId,groupId;
-	String msg,subject;
-	Date msgTime;
+	private int msgId,groupId;
+	private String msg,subject;
+	private Date msgTime;
 	public int getMsgId() {
 		return msgId;
 	}
