@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 public class Group {
 
-	int groupId,hrId;
-	String groupName;
-	int venueId;
+	private int groupId,hrId;
+	private String groupName;
+	private int venueId;
+	private ArrayList<Employee> employeeList = new ArrayList<Employee>();
 	public int getVenueId() {
 		return venueId;
 	}
@@ -19,7 +20,7 @@ public class Group {
 	public void setEmployeeList(ArrayList<Employee> employeeList) {
 		this.employeeList = employeeList;
 	}
-	ArrayList<Employee> employeeList = new ArrayList<Employee>();
+	
 	public int getGroupId() {
 		return groupId;
 	}

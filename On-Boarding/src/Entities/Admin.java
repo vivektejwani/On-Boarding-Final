@@ -2,8 +2,8 @@ package Entities;
 
 public class Admin {
 
-	int adminId;
-	String email,password;
+	private int adminId;
+	private String email,password;
 	
 	public Admin() {
 		// TODO Auto-generated constructor stub

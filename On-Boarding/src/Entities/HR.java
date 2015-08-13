@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class HR {
 
-	int hrId;
-	String password,firstName,lastName,email;
-	ArrayList<Group> groupList = new ArrayList<Group>();
+	private int hrId;
+	private String password,firstName,lastName,email;
+	private ArrayList<Group> groupList = new ArrayList<Group>();
 	
 	public HR() {
 		// TODO Auto-generated constructor stub

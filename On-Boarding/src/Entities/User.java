@@ -2,7 +2,7 @@ package Entities;
 
 public class User {
 
-	String email, password, type;
+	private String email, password, type;
 
 	public String getEmail() {
 		return email;

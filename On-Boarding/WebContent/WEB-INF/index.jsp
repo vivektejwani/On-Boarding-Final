@@ -41,7 +41,7 @@ $(document).ready(function() {
 <!--WRAPPER-->
 <div id="wrapper">
 <!--LOGIN FORM-->
-<form:form method="post" name="login-form" class="login-form">
+<form:form method="post" name="login-form" class="login-form" modelAttribute="user" action="validate.htm">
 
 	<!--HEADER-->
     <div class="header">
@@ -51,10 +51,10 @@ $(document).ready(function() {
 	
 	<!--CONTENT-->
     <div class="content">
-	<!--USERNAME--><form:input path="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
+	<!--USERNAME--><form:input path="email" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
     <!--PASSWORD--><form:input path="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
 	<br><br>
-	<form:select path="typeofac" id="accesstype">
+	<form:select path="type" id="accesstype">
 		<form:option value="default">Select user access type</form:option>
 		<form:option value="HR">HR</form:option>
 		<form:option value="Employee">Employee</form:option>
@@ -65,7 +65,7 @@ $(document).ready(function() {
     
     <!--FOOTER-->
     <div class="footer">
-    <!--LOGIN BUTTON--><form:input type="submit" path="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
+    <!--LOGIN BUTTON--><input type="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
     </div>
     <!--END FOOTER-->
 

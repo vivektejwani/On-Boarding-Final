@@ -2,8 +2,8 @@ package Entities;
 
 public class Venue {
 
-	int venueId,capacity;
-	String trainerName,venueName;
+	private int venueId,capacity;
+	private String trainerName,venueName;
 	public int getVenueId() {
 		return venueId;
 	}

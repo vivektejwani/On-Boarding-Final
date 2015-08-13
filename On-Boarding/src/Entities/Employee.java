@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Employee {
 
-	int empId;
-	String password, email, designation, firstName, lastName;
-	ArrayList<Group> groupList = new ArrayList<Group>();
+	private int empId;
+	private String password, email, designation, firstName, lastName;
+	private ArrayList<Group> groupList = new ArrayList<Group>();
 
 	public Employee() {
 
