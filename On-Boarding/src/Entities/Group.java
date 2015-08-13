@@ -1,9 +1,12 @@
 package Entities;
 
+import java.util.ArrayList;
+
 public class Group {
 
 	int groupId,hrId;
 	String groupName;
+	ArrayList<Employee> employeeList = new ArrayList<Employee>();
 	public int getGroupId() {
 		return groupId;
 	}
