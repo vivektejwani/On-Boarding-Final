@@ -21,100 +21,79 @@ public class OnBoardingPortalControllerImpl implements
 	@Autowired
 	OnBoardingPortalDAO onBoardingPortalDAO;
 
-	//TODO: put url and model attribute
+	// TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView loginUser(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") User user ){
+			HttpServletResponse response, @ModelAttribute("") User user) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		Employee employee = null;
-		if(user.getType().equalsIgnoreCase("employee")){
-			
-			employee= new Employee(user.getEmail(), user.getPassword());
-		}
-		if (onBoardingPortalDAO.validateEmployee(employee)) {
+		if (user.getType().equalsIgnoreCase("employee")) {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("user", employee);
-			// session.setMaxInactiveInterval(1800);
-			// TODO:set view name for page after successful login
-			modelAndView.setViewName("");
-			return modelAndView;
-		}
+			Employee employee = new Employee(user.getEmail(),
+					user.getPassword());
+			Employee employeeFromDAO = onBoardingPortalDAO
+					.validateEmployee(employee);
+			if (employeeFromDAO != null) {
 
-		// TODO: set view name for error page
-		modelAndView.setViewName("");
+				HttpSession session = request.getSession();
+				session.setAttribute("user", employeeFromDAO);
+				// session.setMaxInactiveInterval(1800);
+				// TODO:set view name for page after successful login
+				modelAndView.setViewName("");
+				return modelAndView;
+			}
+		} else if (user.getType().equalsIgnoreCase("hr")) {
 
-		return modelAndView;
+			HR hr = new HR(user.getEmail(), user.getPassword());
 
-	}
+			HR hrFromDAO = onBoardingPortalDAO.validateHr(hr);
 
-	//TODO: put url and model attribute
-	@RequestMapping("")
-	public ModelAndView loginAdmin(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") Admin admin) {
-		ModelAndView modelAndView = new ModelAndView();
+			if (hrFromDAO != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", hrFromDAO);
+				// session.setMaxInactiveInterval(1800);
+				// TODO:set view name for page after successful login
+				modelAndView.setViewName("");
+				return modelAndView;
+			}
+		} else if (user.getType().equalsIgnoreCase("admin")) {
 
-		if (onBoardingPortalDAO.validateAdmin(admin)) {
+			Admin admin = new Admin(user.getEmail(), user.getPassword());
 
-			HttpSession session = request.getSession();
-			session.setAttribute("user", admin);
-			// session.setMaxInactiveInterval(1800);
-			// TODO:set view name for page after successful login
-			modelAndView.setViewName("");
-			return modelAndView;
-		}
+			Admin adminFromDAO = onBoardingPortalDAO.validateAdmin(admin);
 
-		// TODO: set view name for error page
-		modelAndView.setViewName("");
-
-		return modelAndView;
-
-	}
-
-	//TODO: put url and model attribute
-	@RequestMapping("")
-	public ModelAndView loginHr(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") HR hr) {
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (onBoardingPortalDAO.validateHr(hr)) {
-
-			HttpSession session = request.getSession();
-			session.setAttribute("user", hr);
-			// session.setMaxInactiveInterval(1800);
-			// TODO:set view name for page after successful login
-			modelAndView.setViewName("");
-			return modelAndView;
+			if (adminFromDAO != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", admin);
+				// session.setMaxInactiveInterval(1800);
+				// TODO:set view name for page after successful login
+				modelAndView.setViewName("");
+				return modelAndView;
+			}
 		}
 
 		// TODO: set view name for error page
-		modelAndView.setViewName("");
-
-		return modelAndView;
+		return new ModelAndView("");
 
 	}
 
-	//TODO: put url and model attribute
+	// TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView logout(HttpServletRequest request,
-			HttpServletResponse response){
-		
+			HttpServletResponse response) {
+
 		ModelAndView modelAndView = new ModelAndView();
-		
+
 		HttpSession session = request.getSession();
 		session.invalidate();
-		
+
 		// TODO: set view name
 		modelAndView.setViewName("");
 		return modelAndView;
 	}
-	
-	
-	
-	
-	//TODO: put url and model attribute
+
+	// TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView addHR(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute("") HR hr) {
@@ -170,4 +149,5 @@ public class OnBoardingPortalControllerImpl implements
 		return null;
 
 	}
+
 }
