@@ -160,7 +160,7 @@ public class OnBoardingPortalControllerImpl implements
 		map.addAttribute("user", user);
 		System.out.println("Passing user");
 		// TODO: set view name
-		modelAndView.setViewName("index");
+		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 	
