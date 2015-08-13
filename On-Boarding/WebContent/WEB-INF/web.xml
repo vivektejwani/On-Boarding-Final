@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>On-Boarding</display-name>
   
-    <servlet>
+    <!-- <servlet>
     <servlet-name>OnBoardServlet</servlet-name>
 <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -11,7 +11,7 @@
   <servlet-mapping>
     <servlet-name>OnBoardServlet</servlet-name>
     <url-pattern>*.htm</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   
   
   <welcome-file-list>

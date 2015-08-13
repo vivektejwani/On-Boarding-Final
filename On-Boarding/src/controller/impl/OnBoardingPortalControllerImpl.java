@@ -28,9 +28,10 @@ public class OnBoardingPortalControllerImpl implements
 
 		ModelAndView modelAndView = new ModelAndView();
 
+		Employee employee = null;
 		if(user.getType().equalsIgnoreCase("employee")){
 			
-			Employee employee= new Employee(user.getEmail(), user.getPassword());
+			employee= new Employee(user.getEmail(), user.getPassword());
 		}
 		if (onBoardingPortalDAO.validateEmployee(employee)) {
 
