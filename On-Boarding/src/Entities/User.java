@@ -1,15 +1,15 @@
 package Entities;
 
 public class User {
-	
-	String username,password,type;
 
-	public String getUsername() {
-		return username;
+	String email, password, type;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -27,6 +27,5 @@ public class User {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
 
 }

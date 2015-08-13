@@ -12,11 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controller.OnBoardingPortalController;
 import DAO.OnBoardingPortalDAO;
-import Entities.Admin;
-import Entities.Employee;
-import Entities.Group;
-import Entities.HR;
-import Entities.Message;
+import Entities.*;
 
 @Controller
 public class OnBoardingPortalControllerImpl implements
@@ -28,10 +24,14 @@ public class OnBoardingPortalControllerImpl implements
 	//TODO: put url and model attribute
 	@RequestMapping("")
 	public ModelAndView loginUser(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") User user {
+			HttpServletResponse response, @ModelAttribute("") User user ){
 
 		ModelAndView modelAndView = new ModelAndView();
 
+		if(user.getType().equalsIgnoreCase("employee")){
+			
+			Employee employee= new Employee(user.getEmail(), user.getPassword());
+		}
 		if (onBoardingPortalDAO.validateEmployee(employee)) {
 
 			HttpSession session = request.getSession();
