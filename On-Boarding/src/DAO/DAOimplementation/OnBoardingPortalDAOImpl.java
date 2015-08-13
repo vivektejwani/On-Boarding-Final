@@ -1,16 +1,12 @@
 package DAO.DAOimplementation;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
 import requests.EmployeeGroupRequest;
 import DAO.OnBoardingPortalDAO;
@@ -187,6 +183,27 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 
 
 
+		public Employee validateEmployee(Employee employee) {
+			String sql="select * from employee";
+			return null;
+		}
+
+
+
+		public HR validateHr(HR hr) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+
+		public Admin validateAdmin(Admin admin) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+
 		public boolean updateEmployee(Employee employee) {
 			String sql="update employee set  password=?, name_first=?,name_last=?, email=?, designation=? where emp_id=?";
 	    	jdbcTemplate = new JdbcTemplate(dataSource);
@@ -209,150 +226,8 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 			else
 	    	    return false;
 		}
-
-
-
-
-
 	    
 	    
-		 class EmployeeRowMapper implements RowMapper
-			{
-				public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Employee employee = new Employee();
-					employee.setEmpId(rs.getInt("emp_id"));
-					employee.setFirstName(rs.getString("name_first"));
-					employee.setLastName(rs.getString("name_last"));
-					employee.setDesignation(rs.getString("designation"));
-					employee.setPassword(rs.getString("password"));
-					employee.setEmail(rs.getString("email"));
-					return employee;
-				}
-
-				
-			}
-		    
-		    
-			public Employee validateEmployee(Employee employee)
-			{
-				
-				String query="select * from employee where email=? ;";
-				jdbcTemplate = new JdbcTemplate(dataSource);
-				
-				Employee emp = (Employee)jdbcTemplate.queryForObject(query,new Object[]{employee.getEmail()}, new EmployeeRowMapper());
-				
-				if (!(emp.getPassword().equals(employee.getPassword())))
-				{
-					return null;
-				}
-				
-				ArrayList<Group> groups = new ArrayList<Group>();
-				
-				String sql ="select * from emp_group natural join employee natural join ggroup where email=?";
-				
-				List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-				
-				for (Map<String,Object> row : rows) {
-					Group group = new Group();
-					group.setGroupId((Integer)(row.get("group_id")));
-					group.setHrId((Integer)(row.get("hr_id")));
-					group.setVenueId((Integer)(row.get("venue_id")));
-					group.setGroupName((String)row.get("group_name"));
-					
-					groups.add(group);
-				}
-				
-				emp.setGroupList(groups);
-				
-				return emp;
-				
-				
-			}
-			
-			
-			 class HrRowMapper implements RowMapper
-				{
-					public Object mapRow(ResultSet rs, int rowNum) throws SQLException 
-					{
-						HR hr = new HR();
-						hr.setHrId(rs.getInt("hr_id"));
-						hr.setFirstName(rs.getString("name_first"));
-						hr.setLastName(rs.getString("name_last"));
-						hr.setPassword(rs.getString("password"));
-						hr.setEmail(rs.getString("email"));
-						return hr;
-					}
-					
-				}
-			    
-			
-			public HR validateHr(HR hr)
-			{
-				String query="select * from hr where email=? ;";
-				jdbcTemplate = new JdbcTemplate(dataSource);
-				
-				HR hrl = (HR)jdbcTemplate.queryForObject(query,new Object[]{hr.getEmail()}, new HrRowMapper());
-				
-				if (!(hrl.getPassword().equals(hr.getPassword())))
-				{
-					return null;
-				}
-				
-				ArrayList<Group> groups = new ArrayList<Group>();
-				
-				String sql ="select * from ggroup natural join hr where email=?";
-				
-				List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-				
-				for (Map<String,Object> row : rows) {
-					Group group = new Group();
-					group.setGroupId((Integer)(row.get("group_id")));
-					group.setHrId((Integer)(row.get("hr_id")));
-					group.setVenueId((Integer)(row.get("venue_id")));
-					group.setGroupName((String)row.get("group_name"));
-					
-					groups.add(group);
-				}
-				
-				hrl.setGroupList(groups);
-				
-				return hrl;
-				
-			}
-			
-			 class AdminRowMapper implements RowMapper
-				{
-					public Object mapRow(ResultSet rs, int rowNum) throws SQLException 
-					{
-						Admin admin = new Admin();
-						admin.setAdminId(rs.getInt("admin_id"));
-						admin.setPassword(rs.getString("password"));
-						admin.setEmail(rs.getString("email"));
-						return admin;
-					}
-					
-				}
-
-			
-			public Admin validateAdmin(Admin admin)
-			{
-				String query="select * from admin where email=? ;";
-				jdbcTemplate = new JdbcTemplate(dataSource);
-				
-				Admin adm = (Admin)jdbcTemplate.queryForObject(query,new Object[]{admin.getEmail()}, new AdminRowMapper());
-				
-				if(adm.getPassword().equals(admin.getPassword()))
-				{
-					return adm;
-				}
-				else
-				{
-					return null;
-				}
-				
-			}
-
-		
 	
 	}
 
