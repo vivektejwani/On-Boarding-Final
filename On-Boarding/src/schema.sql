@@ -29,6 +29,8 @@ create table ggroup(
                    foreign key (hr_id) references hr(hr_id)
                    );
 
+                   
+                   
 create table message(
                      msg_id int auto_increment primary key
                      msg varchar(256) not null,
@@ -38,6 +40,8 @@ create table message(
                      foreign key (group_id) references ggroup(group_id)
                      );
 
+                     
+                     
 create table emp_group(
 	                   emp_id int,
 	                   group_id int,
