@@ -6,11 +6,11 @@ public class EmployeeGroupRequest {
 	private Employee employee;
 	private Group group;
 	public EmployeeGroupRequest() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public EmployeeGroupRequest(Employee emp, Group grp) {
-		// TODO Auto-generated constructor stub
+		
 		this.employee = emp;
 		this.group = grp;
 	}

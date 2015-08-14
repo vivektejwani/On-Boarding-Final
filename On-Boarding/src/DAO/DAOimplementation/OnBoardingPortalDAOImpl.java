@@ -13,6 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import requests.EmployeeGroupRequest;
+import requests.EmployeeMessagesRequest;
+import requests.HrMessagesRequest;
+import responses.*;
 import DAO.OnBoardingPortalDAO;
 import Entities.*;
 
@@ -75,12 +78,12 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 	    
 	    public boolean addGroup(Group group){
 	        String sql = "INSERT INTO ggroup" +
-	            "( group_name, hr_id,venue_id) VALUES (?, ?, ?)";
+	            "( group_name, hr_id) VALUES (?, ?)";
 	  
 	        jdbcTemplate = new JdbcTemplate(dataSource);
 	        
 	        int u=jdbcTemplate.update(sql, new Object[] { 
-	                 group.getGroupName(), group.getHrId(), group.getVenueId() });
+	                 group.getGroupName(), group.getHrId() });
 	        if(u>0)
 		    	  return true;
 		      else 
@@ -103,7 +106,7 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 	    }
 	    
 	    
-	    public boolean addVenue(Venue venue)
+	  /*  public boolean addVenue(Venue venue)
 	    {
 	    	String sql = "INSERT INTO veneue" +
 		            "( venue_name, trainer_name, capacity) VALUES (?, ?, ?)";
@@ -115,7 +118,7 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 			    	  return true;
 			      else 
 			    	  return false;
-	    }
+	    }*/
 	    
 	    
 	    	
@@ -345,6 +348,31 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 					return null;
 				}
 				
+			}
+
+
+
+			public MessagesResponse postToHr(HrMessagesRequest hrmsg) {
+				if(hrmsg.getGroup()==null)
+				{
+				 String sql1="Select * from ggroup where hr_id=?";
+				 jdbcTemplate = new JdbcTemplate(dataSource);
+				 jdbcTemplate.queryForList()
+				 Employee emp = (Employee)jdbcTemplate.queryForObject(query,new Object[]{employee.getEmail()}, new EmployeeRowMapper());
+					
+				}
+				else
+				{
+					
+				}
+			}
+
+
+
+			public MessagesResponse postToEmployee(
+					EmployeeMessagesRequest empmsg) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 
 		

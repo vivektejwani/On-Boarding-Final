@@ -1,6 +1,7 @@
 package DAO;
 
 import requests.*;
+import responses.*;
 import Entities.*;
 
 
@@ -24,4 +25,9 @@ public interface OnBoardingPortalDAO
 
 	public boolean updateEmployee(Employee employee);
 	public boolean updateHr(HR hr);
+	
+	public MessagesResponse postToHr(HrMessagesRequest hrmsg);
+	public MessagesResponse postToEmployee(EmployeeMessagesRequest empmsg);
+	
+	
 }
