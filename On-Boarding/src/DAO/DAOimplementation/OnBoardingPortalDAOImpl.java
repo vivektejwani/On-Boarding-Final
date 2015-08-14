@@ -1,17 +1,22 @@
 package DAO.DAOimplementation;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import requests.EmployeeGroupRequest;
 import requests.EmployeeMessagesRequest;
 import requests.HrMessagesRequest;
 import responses.*;
+import DAO.OnBoardingPortalDAO;
 import Entities.*;
 
 
@@ -185,27 +190,6 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 
 
 
-		public Employee validateEmployee(Employee employee) {
-			String sql="select * from employee";
-			return null;
-		}
-
-
-
-		public HR validateHr(HR hr) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-
-
-		public Admin validateAdmin(Admin admin) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-
-
 		public boolean updateEmployee(Employee employee) {
 			String sql="update employee set  password=?, name_first=?,name_last=?, email=?, designation=? where emp_id=?";
 	    	jdbcTemplate = new JdbcTemplate(dataSource);
@@ -230,7 +214,6 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 		}
 	    
 	    
-<<<<<<< HEAD
 		 class EmployeeRowMapper implements RowMapper
 			{
 				public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -393,8 +376,6 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 			}
 
 		
-=======
->>>>>>> branch 'master' of https://github.com/vivektejwani/On-Boarding-Final
 	
 	}
 
