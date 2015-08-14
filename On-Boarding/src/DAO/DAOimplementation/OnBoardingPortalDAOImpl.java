@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -77,7 +78,7 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 	    }  
 	    
 	    
-	    public boolean addGroup(Group group){
+	    public Group addGroup(Group group){
 	        String sql = "INSERT INTO ggroup" +
 	            "( group_name, hr_id) VALUES (?, ?)";
 	  
@@ -85,10 +86,11 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 	        
 	        int u=jdbcTemplate.update(sql, new Object[] { 
 	                 group.getGroupName(), group.getHrId() });
-	        if(u>0)
-		    	  return true;
-		      else 
-		    	  return false;
+	        
+	        String  sql2="select * from ggroup where group_name=? and hr_id=?";
+	        Group g=(Group)jdbcTemplate.queryForObject(sql2, new Object[]{group.getGroupName(),group.getHrId()}, new BeanPropertyRowMapper(Group.class));
+	        
+	       return g;
 	    }  
 	    
 	    

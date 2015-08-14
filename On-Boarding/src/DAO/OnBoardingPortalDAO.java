@@ -9,7 +9,7 @@ public interface OnBoardingPortalDAO
 {
 	public boolean addEmployee(Employee employee);
 	public boolean addHr(HR hr);
-	public boolean addGroup(Group group);
+	public Group addGroup(Group group);
 	public boolean addMessage(Message message);
 	
 	public boolean addEmployeeGroup(EmployeeGroupRequest empgrpreq);
