@@ -26,8 +26,9 @@ public interface OnBoardingPortalDAO
 	public boolean updateEmployee(Employee employee);
 	public boolean updateHr(HR hr);
 	
-	public MessagesResponse postToHr(HrMessagesRequest hrmsg);
-	public MessagesResponse postToEmployee(EmployeeMessagesRequest empmsg);
+	public MessagesResponse postForHr(HrMessagesRequest hrmsg);
+	public MessagesResponse postForEmployee(EmployeeMessagesRequest empmsg);
 	
+	public  Group getAllEmpGrp(Group group);
 	
 }

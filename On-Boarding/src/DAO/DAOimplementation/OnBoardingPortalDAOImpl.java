@@ -3,6 +3,7 @@ package DAO.DAOimplementation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -234,7 +235,7 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 			public Employee validateEmployee(Employee employee)
 			{
 				
-				String query="select * from employee where email=? ;";
+				String query="select * from employee where email=? ";
 				jdbcTemplate = new JdbcTemplate(dataSource);
 				
 				Employee emp = (Employee)jdbcTemplate.queryForObject(query,new Object[]{employee.getEmail()}, new EmployeeRowMapper());
@@ -352,28 +353,224 @@ public class OnBoardingPortalDAOImpl implements OnBoardingPortalDAO{
 
 
 
-			public MessagesResponse postToHr(HrMessagesRequest hrmsg) {
-				if(hrmsg.getGroup()==null)
+			
+			
+			public Group getAllEmpGrp(Group group)
+			{
+				ArrayList<Employee> lt=new ArrayList<Employee>();
+				String sql="Select * from employee NATURAL JOIN emp_group where group_id=?";
+				
+                jdbcTemplate = new JdbcTemplate(dataSource);
+                List<Map<String, Object>> rows=jdbcTemplate.queryForList(sql, new Object[]{group.getGroupId()});
+                for (Map<String,Object> row : rows) {
+                	
+                	            Employee employee = new Employee();
+                	
+                	            employee.setEmpId(Integer.parseInt(String.valueOf(row.get("emp_id"))));
+                	            employee.setPassword((String)row.get("password"));
+                	
+                	            employee.setFirstName((String)row.get("name_first"));
+                	            employee.setLastName((String)row.get("last_first"));
+                	            employee.setEmail((String)row.get("email"));
+                	            employee.setDesignation((String)row.get("designation"));
+                	            
+                	            lt.add(employee);
+                	            
+                	        }
+                group.setEmployeeList(lt);
+              
+				return group;	      
+
+				
+				
+				 
+			}
+			
+			
+			class MessageRowMapper implements RowMapper
+			{
+				public Object mapRow(ResultSet rs, int rowNum) throws SQLException 
 				{
-				 String sql1="Select * from ggroup where hr_id=?";
-				 jdbcTemplate = new JdbcTemplate(dataSource);
-				 jdbcTemplate.queryForList()
-				 Employee emp = (Employee)jdbcTemplate.queryForObject(query,new Object[]{employee.getEmail()}, new EmployeeRowMapper());
+					Message msg = new Message();
+					msg.setMsgId(rs.getInt("msg_id"));
+					msg.setGroupId(rs.getInt("group_id"));
+					msg.setMsg(rs.getString("msg"));
+					msg.setSubject(rs.getString("subject"));
+					msg.setMsgTime(rs.getDate("msg_time"));
+					return msg;
+				}
+				
+			}
+		
+
+			public MessagesResponse postForHr(HrMessagesRequest hrmsg)
+			{
+				if(hrmsg.getGroup() == null)
+				{
+					// return all the messagges
 					
+					
+					jdbcTemplate = new JdbcTemplate(dataSource);
+					ArrayList<Group> groups = new ArrayList<Group>();
+					
+					String sql ="select * from ggroup natural join hr where email=?";
+					
+					List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql,new Object[]{hrmsg.getHr().getEmail()});
+					
+					for (Map<String,Object> row : rows) {
+						Group group = new Group();
+						group.setGroupId((Integer)(row.get("group_id")));
+						group.setHrId((Integer)(row.get("hr_id")));
+						group.setVenueId((Integer)(row.get("venue_id")));
+						group.setGroupName((String)row.get("group_name"));
+						
+						groups.add(group);
+					}
+					
+					MessagesResponse mr = new MessagesResponse();
+					ArrayList<Group> arg = new ArrayList<Group>();
+					ArrayList<Message> arm = new ArrayList<Message>();
+					
+					for (Group g:groups)
+					{
+						String sql2="select * from message where group_id='"+g.getGroupId()+"'";
+						jdbcTemplate = new JdbcTemplate(dataSource);
+						List<Map<String, Object>> rows2 = jdbcTemplate.queryForList(sql);
+						
+						for (Map<String,Object> row : rows2)
+						{
+							Message msg = new Message();
+							msg.setMsgId((Integer)row.get("msg_id"));
+							msg.setGroupId((Integer)row.get("group_id"));
+							msg.setMsg((String)row.get("msg"));
+							msg.setSubject((String)row.get("subject"));
+							msg.setMsgTime((Date)row.get("msg_time"));
+						
+							arm.add(msg);
+							arg.add(g);
+						}
+								
+					}
+					mr.setGroupsList(arg);
+					mr.setMessagesList(arm);
+					return mr;
 				}
 				else
 				{
+					MessagesResponse mr = new MessagesResponse();
+					ArrayList<Group> arg = new ArrayList<Group>();
+					ArrayList<Message> arm = new ArrayList<Message>();
 					
+					Group g = hrmsg.getGroup();
+					//int id = hrmsg.getGroup().getGroupId();
+					String sql2="select * from message where group_id=? sort by msg_time";
+					jdbcTemplate = new JdbcTemplate(dataSource);
+					List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql2,new Object[]{g.getGroupId()});
+					
+					for (Map<String,Object> row : rows)
+					{
+						Message msg = new Message();
+						msg.setMsgId((Integer)row.get("msg_id"));
+						msg.setGroupId((Integer)row.get("group_id"));
+						msg.setMsg((String)row.get("msg"));
+						msg.setSubject((String)row.get("subject"));
+						msg.setMsgTime((Date)row.get("msg_time"));
+					
+						arm.add(msg);
+						arg.add(g);
+					}
+					mr.setGroupsList(arg);
+					mr.setMessagesList(arm);
+					return mr;		
 				}
+			
+				}
+			
+			
+			public MessagesResponse postForEmployee(EmployeeMessagesRequest hrmsg)
+			{
+				if(hrmsg.getGroup() == null)
+				{
+					// return all the messagges
+					
+					String sql="select * from employee natural join emp_group where emp_id=?";
+					jdbcTemplate = new JdbcTemplate(dataSource);
+					ArrayList<Group> groups = new ArrayList<Group>();
+					
+				//	String sql ="select * from ggroup natural join emp_group natural join employee where email='"+hrmsg.getEmployee().getEmail()+"'";
+					
+					List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql,new Object[]{hrmsg.getEmployee().getEmail()});
+					
+					for (Map<String,Object> row : rows) {
+						Group group = new Group();
+						group.setGroupId((Integer)(row.get("group_id")));
+						group.setHrId((Integer)(row.get("hr_id")));
+						group.setVenueId((Integer)(row.get("venue_id")));
+						group.setGroupName((String)row.get("group_name"));
+						
+						groups.add(group);
+					}
+					
+					MessagesResponse mr = new MessagesResponse();
+					ArrayList<Group> arg = new ArrayList<Group>();
+					ArrayList<Message> arm = new ArrayList<Message>();
+					
+					for (Group g:groups)
+					{
+						String sql2="select * from message where group_id='"+g.getGroupId()+"'";
+						jdbcTemplate = new JdbcTemplate(dataSource);
+						List<Map<String, Object>> rows2 = jdbcTemplate.queryForList(sql);
+						
+						for (Map<String,Object> row : rows2)
+						{
+							Message msg = new Message();
+							msg.setMsgId((Integer)row.get("msg_id"));
+							msg.setGroupId((Integer)row.get("group_id"));
+							msg.setMsg((String)row.get("msg"));
+							msg.setSubject((String)row.get("subject"));
+							msg.setMsgTime((Date)row.get("msg_time"));
+						
+							arm.add(msg);
+							arg.add(g);
+						}
+								
+					}
+					mr.setGroupsList(arg);
+					mr.setMessagesList(arm);
+					return mr;
+				}
+				else
+				{
+					MessagesResponse mr = new MessagesResponse();
+					ArrayList<Group> arg = new ArrayList<Group>();
+					ArrayList<Message> arm = new ArrayList<Message>();
+					Group g = hrmsg.getGroup();
+					int id = hrmsg.getGroup().getGroupId();
+					String sql2="select * from message where group_id=?";
+					jdbcTemplate = new JdbcTemplate(dataSource);
+					List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql2,new Object[]{g.getGroupId()});
+					
+					for (Map<String,Object> row : rows)
+					{
+						Message msg = new Message();
+						msg.setMsgId((Integer)row.get("msg_id"));
+						msg.setGroupId((Integer)row.get("group_id"));
+						msg.setMsg((String)row.get("msg"));
+						msg.setSubject((String)row.get("subject"));
+						msg.setMsgTime((Date)row.get("msg_time"));
+					
+						arm.add(msg);
+						arg.add(g);
+					}
+							
+				
+				mr.setGroupsList(arg);
+				mr.setMessagesList(arm);
+				return mr;
+				}
+				
 			}
 
-
-
-			public MessagesResponse postToEmployee(
-					EmployeeMessagesRequest empmsg) {
-				// TODO Auto-generated method stub
-				return null;
-			}
 
 		
 	
