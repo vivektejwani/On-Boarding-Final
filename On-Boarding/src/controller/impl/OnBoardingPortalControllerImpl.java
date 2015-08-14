@@ -6,13 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import requests.EmployeeGroupRequest;
 import controller.OnBoardingPortalController;
-import DAO.OnBoardingPortalDAO;
+import DAO.DAOimplementation.OnBoardingPortalDAO;
 import Entities.*;
 
 @Controller
@@ -23,9 +24,9 @@ public class OnBoardingPortalControllerImpl implements
 	OnBoardingPortalDAO onBoardingPortalDAO;
 
 	// TODO: put url and model attribute
-	@RequestMapping("")
+	@RequestMapping("validate")
 	public ModelAndView loginUser(HttpServletRequest request,
-			HttpServletResponse response, @ModelAttribute("") User user) {
+			HttpServletResponse response, @ModelAttribute("user") User user) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -33,8 +34,7 @@ public class OnBoardingPortalControllerImpl implements
 
 			Employee employee = new Employee(user.getEmail(),
 					user.getPassword());
-			Employee employeeFromDAO = onBoardingPortalDAO
-					.validateEmployee(employee);
+			Employee employeeFromDAO = onBoardingPortalDAO.validateEmployee(employee);
 			if (employeeFromDAO != null) {
 
 				HttpSession session = request.getSession();
@@ -151,6 +151,20 @@ public class OnBoardingPortalControllerImpl implements
 
 	}
 
+
+	@RequestMapping("newSession.htm")
+	public ModelAndView newSession(HttpServletRequest request,HttpServletResponse response, ModelMap map){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		User user = new User();
+		map.addAttribute("user", user);
+		System.out.println("Passing user");
+		// TODO: set view name
+		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+	
 	public ModelAndView addEmployeeToGroup(HttpServletRequest request,
 			HttpServletResponse response,
 			EmployeeGroupRequest employeeGroupRequest) {

@@ -10,19 +10,12 @@
 	<ctx:annotation-config></ctx:annotation-config>
 	<ctx:component-scan base-package="controller.impl"></ctx:component-scan>
 
-	<bean id="configurationLoader"
-		class="org.springmodules.validation.bean.conf.loader.annotation.AnnotationBeanValidationConfigurationLoader" />
+	 
 
-
-	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource"
-		p:basenames="messages" />
-
-
-
+	<bean id="onBoardingPortalDAO" class="DAO.DAOimplementation.OnBoardingPortalDAOImpl"></bean>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
+		<property name="prefix" value="" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 

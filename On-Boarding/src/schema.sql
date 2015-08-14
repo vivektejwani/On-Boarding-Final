@@ -26,11 +26,11 @@ create table ggroup(
                    group_id int auto_increment primary key,
                    group_name varchar(32) not null,
                    hr_id int not null,
-                   venue_id int,
-                   foreign key venue_id references venue(venue_id),
                    foreign key (hr_id) references hr(hr_id)
                    );
 
+                   
+                   
 create table message(
                      msg_id int auto_increment primary key
                      msg varchar(256) not null,
@@ -40,6 +40,8 @@ create table message(
                      foreign key (group_id) references ggroup(group_id)
                      );
 
+                     
+                     
 create table emp_group(
 	                   emp_id int,
 	                   group_id int,
@@ -48,6 +50,5 @@ create table emp_group(
 	                   foreign key group_id references ggroup(group_id)
                        );
                        
-create table venue(venue_id int auto_increment primary key,venue_name varchar(32),trainer_name varchar(32),capacity int);
 
 
